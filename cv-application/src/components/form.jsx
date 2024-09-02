@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-const Buttons = () => {
+const Buttons = ({handleCancel}) => {
     return (
      <div class = "col-md-4" id ="buttons">
-       <button class = "btn btn-danger">Cancel</button>
+       <button onClick = {handleCancel} class = "btn btn-danger">Cancel</button>
        <button type="submit" class = "btn btn-success">Save</button>
     </div>
     )
@@ -25,7 +25,7 @@ const FormField = ({label,type,id,placeholder,elementType = "input",value}) => {
 
 }
 
-const FormGeneral = ({handleSubmit,data}) => {
+const FormGeneral = ({handleSubmit,data,handleCancel}) => {
     console.log(data);
     
     return (
@@ -35,14 +35,14 @@ const FormGeneral = ({handleSubmit,data}) => {
             <FormField label="Email" type="email" id="email" placeholder="Enter your Email" value = {data.email}/>
             <FormField label="Phone Number" type="text" id="phone" placeholder="Enter Phone Number" value = {data.phone}/>
             <FormField label="Address" type="text" id="address" placeholder="Enter Address" value = {data.address}/>
-            <Buttons />
+            <Buttons  handleCancel = {handleCancel} />
             </div>
         </form>
     )
 }
 
 
-const FormEducation = ({ handleSubmit,data}) => {
+const FormEducation = ({ handleSubmit,data,handleCancel = {handleCancel}}) => {
     return (
       <form onSubmit={handleSubmit}>
         <div className="form-row">
@@ -50,13 +50,13 @@ const FormEducation = ({ handleSubmit,data}) => {
           <FormField label="Degree" type="text" id="degree" placeholder="Enter Degree" value={data.degree}/>
           <FormField label="Start Date - End Date" type="text" id="start-college" placeholder="Start - End" value = {data.duration}/>
           <FormField label="Location" type="text" id="loc-college" placeholder="Location" value = {data.location}/>
-          <Buttons />
+          <Buttons handleCancel = {handleCancel}/>
         </div>
       </form>
     );
 };
 
-const FormExperience = ({handleSubmit , data}) => {
+const FormExperience = ({handleSubmit , data, handleCancel = {handleCancel}}) => {
     return (
         <form onSubmit={handleSubmit}>
             <div className="form-row">
@@ -65,7 +65,7 @@ const FormExperience = ({handleSubmit , data}) => {
                 <FormField label="Start Date - End Date" type="text" id="start-company" placeholder="Start - End" value = {data.duration}/>
                 <FormField label = "Location" type = "text" id = "loc-company" placeholder= "Enter Company Location" value = {data.location}/>
                 <FormField label = "Description" type = "text" id = "des" placeholder= "Write Description" elementType="textArea" value = {data.description}/>
-                <Buttons />
+                <Buttons handleCancel = {handleCancel}/>
 
             </div>
         </form>
@@ -73,7 +73,7 @@ const FormExperience = ({handleSubmit , data}) => {
 }
 
 
-const Form = ({title,handleSubmit,data}) => {
+const Form = ({title,handleSubmit,data,handleCancel}) => {
     
     console.log(data);
     
@@ -81,7 +81,7 @@ const Form = ({title,handleSubmit,data}) => {
     if(title === "General Information"){
         return (
             <>
-            <FormGeneral handleSubmit = {handleSubmit} data = {data}/>
+            <FormGeneral handleSubmit = {handleSubmit} data = {data} handleCancel = {handleCancel}/>
             </>
         )
     }
@@ -89,14 +89,14 @@ const Form = ({title,handleSubmit,data}) => {
     if(title == "Education"){
         return (
             <>
-            <FormEducation handleSubmit={handleSubmit} data = {data}/>
+            <FormEducation handleSubmit={handleSubmit} data = {data} handleCancel = {handleCancel}/>
             </>
         )
     }
 
     return (
         <>
-        <FormExperience handleSubmit={handleSubmit} data = {data}/>
+        <FormExperience handleSubmit={handleSubmit} data = {data} handleCancel = {handleCancel}/>
         </>
     )
 

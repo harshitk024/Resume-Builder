@@ -129,6 +129,11 @@ const EditButton  = ({handleEdit}) => {
 }
 
 
+const handleCancel = () => {
+   setIsActive(false)
+}
+
+
 
 const Panel = ({title,data,handler}) => {
 
@@ -194,7 +199,7 @@ const Panel = ({title,data,handler}) => {
     return (
         <>
          <Header title = {title} setCaretClick = {setCaretClick}  isActive  = {isActive} />
-         {isActive ? ( isSubmitted && !isEdit ? (<><InfoPanel title = {title} data = {data} handleEdit = {handleEdit} /></>) : <Form title = {title} handleSubmit = {(e) => handleSubmit(e,title)} data = {data} /> ) : <></>}
+         {isActive ? ( isSubmitted && !isEdit ? (<><InfoPanel title = {title} data = {data} handleEdit = {handleEdit} /></>) : <Form title = {title} handleSubmit = {(e) => handleSubmit(e,title)} data = {data} handleCancel = {handleCancel}/> ) : <></>}
         </>
     )
 

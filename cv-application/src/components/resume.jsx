@@ -1,16 +1,98 @@
 
 
+
+const Text = ({id, elementType,data,val,style}) => {
+    return (
+         elementType === "h" ? (
+        <h2 id = {id} style={style}>{data.trim() === "" ? val: data}</h2> )
+         : (
+           <p id = {id} style={style}>{data.trim() == "" ? val : data}</p>
+         )
+        
+    )
+}
 const ResumeHeader = ({data}) => {
+
       return (
         <>
         <div class = "header-resume">
-             <div>
-                <h3 id = "resume-name">{data.name}</h3>
+             <div id = "name-container">
+                <Text id = "resume-name" elementType={"h"} data = {data.name} val = "ExampleName"/>
+             </div>
+             <div id = "gen-info-container">
+                <Text id = "resume-phone" data = {data.phone} val = "Examplephone" />
+                <Text id = "resume-email" data = {data.email} val = "ExampleEmail" />
+                <Text id = "resume-address" style={{border: 0}} data = {data.address} val = "ExampleAddress" />
              </div>
         </div>
         </>
       )
 }
+
+
+const ResumeEducation = ({data}) => {
+   return (
+    <>
+     <div class = "resume-section" id = "resume-education">
+     <div class = "section-title">
+        <h3>Education</h3>
+     </div>
+     <div class = "section-body">
+       <div class = "body-container">
+          <div class = "resume-college">
+             <Text data = {data.college} val = {"ExampleCollege"} />
+          </div>
+          <div class = "resume-college-location">
+          <Text data = {data.location} val = {"ExampleLocation"} />
+          </div>
+       </div>
+       <div class = "body-container">
+          <div class = "resume-college-degree">
+          <Text data = {data.degree} val = {"ExampleDegree"} />
+          </div>
+          <div class = "resume-college-duration">
+          <Text data = {data.duration} val = {"ExampleDuration"} />
+          </div>
+       </div>
+     </div>
+     </div>
+    </>
+   )
+}
+
+const ResumeExperience = ({data}) => {
+    return (
+     <>
+      <div class = "resume-section" id = "resume-education">
+      <div class = "section-title">
+         <h3>Experience</h3>
+      </div>
+      <div class = "section-body">
+        <div class = "body-container">
+           <div class = "resume-company">
+           <Text data = {data.company} val = {"ExampleCompany"} />
+           </div>
+           <div class = "resume-company-location">
+           <Text data = {data.location} val = {"ExampleLocation"} />
+           </div>
+        </div>
+        <div class = "body-container">
+           <div class = "resume-company-role">
+           <Text data = {data.position} val = {"ExamplePosition"} />
+           </div>
+           <div class = "resume-company-duration">
+           <Text data = {data.duration} val = {"ExampleDuration"} />
+           </div>
+        </div>
+        <div class = "company-description">
+        <Text data = {data.description} val = {"Description...."} />
+        </div>
+      </div>
+      </div>
+     </>
+    )
+ }
+
 
 const Section = ({title,data}) => {
 
@@ -22,7 +104,10 @@ export default function Resume({data}){
         <div id = "resume">
             <div id = "resume-body">
                <ResumeHeader data = {data[0]}/>
+               <ResumeEducation data = {data[1]}/>
+               <ResumeExperience data = {data[2]} />
             </div>
+ 
         </div>
     )
 }

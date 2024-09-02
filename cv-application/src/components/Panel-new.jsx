@@ -168,6 +168,7 @@ const Panel = (props) => {
 
 
 
+
     const setCaretClick = () => {
         isActive ? setIsActive(false) : setIsActive(true)
     }
@@ -218,7 +219,7 @@ const Panel = (props) => {
     return (
         <>
          <Header title = {props.title} setCaretClick = {setCaretClick}  isActive  = {isActive} />
-         {isActive ? ( isSubmitted && !isEdit ? (<><InfoPanel title = {props.title} data = {[generalInfo,eduInfo,expInfo]} handleEdit = {handleEdit} /></>) : <Form title = {props.title} handleSubmit = {(e) => handleSubmit(e,props.title)} data = {[generalInfo,eduInfo,expInfo]} /> ) : <></>}
+         {isActive ? ( isSubmitted && !isEdit ? (<><InfoPanel title = {props.title} data = {[generalInfo,eduInfo,expInfo]} handleEdit = {handleEdit} /></>) : <Form title = {props.title} handleSubmit = {(e) => handleSubmit(e,props.title)} data = {[generalInfo,eduInfo,expInfo]} handleCancel = {handleCancel}/> ) : <></>}
         </>
     )
 
