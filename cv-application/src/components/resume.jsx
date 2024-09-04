@@ -15,7 +15,7 @@ const ResumeHeader = ({data}) => {
 
       return (
         <>
-        <div class = "header-resume">
+        <div className = "header-resume">
              <div id = "name-container">
                 <Text id = "resume-name" elementType={"h"} data = {data.name} val = "ExampleName"/>
              </div>
@@ -33,24 +33,24 @@ const ResumeHeader = ({data}) => {
 const ResumeEducation = ({data}) => {
    return (
     <>
-     <div class = "resume-section" id = "resume-education">
-     <div class = "section-title">
+     <div className = "resume-section" id = "resume-education">
+     <div className = "section-title">
         <h3>Education</h3>
      </div>
-     <div class = "section-body">
-       <div class = "body-container">
-          <div class = "resume-college">
+     <div className = "section-body">
+       <div className = "body-container">
+          <div className = "resume-college">
              <Text data = {data.college} val = {"ExampleCollege"} />
           </div>
-          <div class = "resume-college-location">
+          <div className = "resume-college-location">
           <Text data = {data.location} val = {"ExampleLocation"} />
           </div>
        </div>
-       <div class = "body-container">
-          <div class = "resume-college-degree">
+       <div className = "body-container">
+          <div className = "resume-college-degree">
           <Text data = {data.degree} val = {"ExampleDegree"} />
           </div>
-          <div class = "resume-college-duration">
+          <div className = "resume-college-duration">
           <Text data = {data.duration} val = {"ExampleDuration"} />
           </div>
        </div>
@@ -63,28 +63,28 @@ const ResumeEducation = ({data}) => {
 const ResumeExperience = ({data}) => {
     return (
      <>
-      <div class = "resume-section" id = "resume-education">
-      <div class = "section-title">
+      <div className = "resume-section" id = "resume-education">
+      <div className = "section-title">
          <h3>Experience</h3>
       </div>
-      <div class = "section-body">
-        <div class = "body-container">
-           <div class = "resume-company">
+      <div className = "section-body">
+        <div className = "body-container">
+           <div className = "resume-company">
            <Text data = {data.company} val = {"ExampleCompany"} />
            </div>
-           <div class = "resume-company-location">
+           <div className = "resume-company-location">
            <Text data = {data.location} val = {"ExampleLocation"} />
            </div>
         </div>
-        <div class = "body-container">
-           <div class = "resume-company-role">
+        <div className = "body-container">
+           <div className = "resume-company-role">
            <Text data = {data.position} val = {"ExamplePosition"} />
            </div>
-           <div class = "resume-company-duration">
+           <div className = "resume-company-duration">
            <Text data = {data.duration} val = {"ExampleDuration"} />
            </div>
         </div>
-        <div class = "company-description">
+        <div className = "company-description">
         <Text data = {data.description} val = {"Description...."} />
         </div>
       </div>

@@ -39,7 +39,7 @@ const InfoPanelLine = ({label,value}) => {
     )
 }
  
-const GeneralInfoPanel = ({ data , handleEdit}) => {
+const GeneralInfoPanel = ({ data , handleEdit,handleDelete}) => {
 
     return(
         <>
@@ -48,14 +48,14 @@ const GeneralInfoPanel = ({ data , handleEdit}) => {
           <InfoPanelLine label = "Email" value = {data.email} />
           <InfoPanelLine label = "Phone Number" value = {data.phone} />
           <InfoPanelLine label = "Address" value = {data.address} />
-          <EditButton handleEdit = {handleEdit} />
+          <EditButton handleEdit = {handleEdit} handleDelete={handleDelete} />
         </div>
         </>
     )
     
 }
 
-const EducationInfoPanel = ({ data , handleEdit }) => {
+const EducationInfoPanel = ({ data , handleEdit, handleDelete}) => {
 
     return(
         <>
@@ -64,14 +64,14 @@ const EducationInfoPanel = ({ data , handleEdit }) => {
           <InfoPanelLine label = "Degree" value = {data.degree} />
           <InfoPanelLine label = "Duration" value = {data.duration} />
           <InfoPanelLine label = "Address" value = {data.location} />
-          <EditButton handleEdit = {handleEdit} />
+          <EditButton handleEdit = {handleEdit} handleDelete={handleDelete}/>
         </div>
         </>
     )
     
 }
 
-const ExperienceInfoPanel = ({ data,handleEdit }) => {
+const ExperienceInfoPanel = ({ data,handleEdit, handleDelete }) => {
 
     return(
         <>
@@ -81,20 +81,20 @@ const ExperienceInfoPanel = ({ data,handleEdit }) => {
           <InfoPanelLine label = "Duration" value = {data.duration} />
           <InfoPanelLine label = "Location" value = {data.location} />
           <InfoPanelLine label = "Description" value = {data.description} />
-          <EditButton handleEdit = {handleEdit}/>
+          <EditButton handleEdit = {handleEdit} handleDelete={handleDelete}/>
         </div>
         </>
     )
     
 }
 
-const InfoPanel = ({title,data,handleEdit}) => {
+const InfoPanel = ({title,data,handleEdit,handleDelete}) => {
     
     if(title === "General Information"){
 
         return (
             <>
-            <GeneralInfoPanel data = {data} handleEdit = {handleEdit} />
+            <GeneralInfoPanel data = {data} handleEdit = {handleEdit} handleDelete = {handleDelete} />
             </>
         )
 
@@ -103,22 +103,22 @@ const InfoPanel = ({title,data,handleEdit}) => {
     if(title === "Education"){
         return (
             <>
-            <EducationInfoPanel data = {data} handleEdit = {handleEdit} />
+            <EducationInfoPanel data = {data} handleEdit = {handleEdit} handleDelete = {handleDelete} />
             </>
         )
     }
 
     return (
         <>
-        <ExperienceInfoPanel data = {data} handleEdit = {handleEdit}/>
+        <ExperienceInfoPanel data = {data} handleEdit = {handleEdit} handleDelete = {handleDelete}/>
         </>
     )
 }
 
-const EditButton  = ({handleEdit}) => {
+const EditButton  = ({handleEdit, handleDelete}) => {
     return (
         <div id = "buttons">
-            <button class = "btn btn-light" id  = "delete"><strong>Delete</strong></button>
+            {/* <button class = "btn btn-light" id  = "delete" onClick={handleDelete}><strong>Delete</strong></button> */}
             <button class = "btn btn-light" id = "edit" onClick={handleEdit}><strong>Edit</strong>
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -153,45 +153,57 @@ const Panel = ({title,data,handler}) => {
         isActive ? setIsActive(false) : setIsActive(true)
     }
 
+
+
+    const runHandlers = (title) => {
+
+        if(title === "General Information"){
+
+            handler(
+             {
+                 "name" : document.getElementById("full-name").value,
+                 "email" : document.getElementById("email").value,
+                 "phone" : document.getElementById("phone").value,
+                 "address" : document.getElementById("address").value
+             }
+             )
+     
+            }else if(title === "Education"){
+     
+            handler(
+             {
+                 "college" : document.getElementById("college").value,
+                 "degree" : document.getElementById("degree").value,
+                 "duration" : document.getElementById("start-college").value,
+                 "location" : document.getElementById("loc-college").value
+             }
+            )
+           }else{
+     
+            handler(
+             {
+                 "company" : document.getElementById("company").value,
+                 "position" : document.getElementById("pos").value,
+                 "duration" : document.getElementById("start-company").value,
+                 "location" : document.getElementById("loc-company").value,
+                 "description" : document.getElementById("des").value
+             }
+            )
+           }
+
+    }
+
+
+
     const handleSubmit = (e,title) => {
        e.preventDefault()
 
        setIsSubmitted(true)
        setIsEdit(false)
 
-       if(title === "General Information"){
+       runHandlers(title)
 
-       handler(
-        {
-            "name" : document.getElementById("full-name").value,
-            "email" : document.getElementById("email").value,
-            "phone" : document.getElementById("phone").value,
-            "address" : document.getElementById("address").value
-        }
-        )
-
-       }else if(title === "Education"){
-
-       handler(
-        {
-            "college" : document.getElementById("college").value,
-            "degree" : document.getElementById("degree").value,
-            "duration" : document.getElementById("start-college").value,
-            "location" : document.getElementById("loc-college").value
-        }
-       )
-      }else{
-
-       handler(
-        {
-            "company" : document.getElementById("company").value,
-            "position" : document.getElementById("pos").value,
-            "duration" : document.getElementById("start-company").value,
-            "location" : document.getElementById("loc-company").value,
-            "description" : document.getElementById("des").value
-        }
-       )
-      }
+      
     }
 
 
@@ -199,7 +211,7 @@ const Panel = ({title,data,handler}) => {
     return (
         <>
          <Header title = {title} setCaretClick = {setCaretClick}  isActive  = {isActive} />
-         {isActive ? ( isSubmitted && !isEdit ? (<><InfoPanel title = {title} data = {data} handleEdit = {handleEdit} /></>) : <Form title = {title} handleSubmit = {(e) => handleSubmit(e,title)} data = {data} handleCancel = {handleCancel}/> ) : <></>}
+         {isActive ? ( isSubmitted && !isEdit ? (<><InfoPanel title = {title} data = {data} handleEdit = {handleEdit}  /></>) : <Form title = {title} handleSubmit = {(e) => handleSubmit(e,title)} data = {data} handleCancel = {handleCancel}/> ) : <></>}
         </>
     )
 
